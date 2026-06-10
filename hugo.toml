@@ -1,0 +1,44 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-CN'
+title = "VERNIY.SITE"
+theme = "void"
+
+# Social media links
+[params]
+  [params.social]
+    github = "https://github.com/EilixiusLu"
+    twitter = "https://twitter.com/yourusername"
+    email = "dec_verniy@outlook.com"
+
+# Main menu
+[[menus.main]]
+name = 'Main'
+pageRef = '/'
+weight = 10
+
+[[menus.main]]
+name = 'Blogs'
+pageRef = '/posts'
+weight = 20
+
+[[menus.main]]
+name = 'Tags'
+pageRef = '/tags'
+weight = 30
+
+[[menus.main]]
+name = 'About'
+pageRef = '/about'
+weight = 40
+
+# Table of Contents (recommended)
+[markup]
+  [markup.tableOfContents]
+    startLevel = 1
+    endLevel = 6
+    ordered = false
+
+# Allow raw HTML within Markdown (for KaTeX, etc.)
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
