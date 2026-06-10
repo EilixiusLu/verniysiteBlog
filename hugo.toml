@@ -1,44 +1,53 @@
-baseURL = 'https://example.org/'
-languageCode = 'zh-CN'
-title = "VERNIY.SITE"
-theme = "void"
+baseURL      = 'https://verniy.site/'
+locale = 'zh-CN'
+title        = 'VERNIY.SITE'
+theme        = 'void'
 
-# Social media links
+# =============================================================================
+# Avatar (displayed on homepage & about page)
+# =============================================================================
 [params]
+  [params.avatar]
+    url = '/avatar.webp'
+
+# =============================================================================
+# Social Links
+# =============================================================================
   [params.social]
-    github = "https://github.com/EilixiusLu"
-    twitter = "https://twitter.com/yourusername"
-    email = "dec_verniy@outlook.com"
+    github = 'https://github.com/EilixiusLu'
+    email  = 'dec_verniy@outlook.com'
 
-# Main menu
+# =============================================================================
+# Main Menu
+# =============================================================================
 [[menus.main]]
-name = 'Main'
-pageRef = '/'
-weight = 10
-
-[[menus.main]]
-name = 'Blogs'
-pageRef = '/posts'
-weight = 20
+  name    = 'Main'
+  pageRef = '/'
+  weight  = 10
 
 [[menus.main]]
-name = 'Tags'
-pageRef = '/tags'
-weight = 30
+  name    = 'Blogs'
+  pageRef = '/posts'
+  weight  = 20
 
 [[menus.main]]
-name = 'About'
-pageRef = '/about'
-weight = 40
+  name    = 'Tags'
+  pageRef = '/tags'
+  weight  = 30
 
-# Table of Contents (recommended)
+[[menus.main]]
+  name    = 'About'
+  pageRef = '/about'
+  weight  = 40
+
+# =============================================================================
+# Markup
+# =============================================================================
 [markup]
   [markup.tableOfContents]
     startLevel = 1
-    endLevel = 6
-    ordered = false
+    endLevel   = 6
+    ordered    = false
 
-# Allow raw HTML within Markdown (for KaTeX, etc.)
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
+  [markup.goldmark.renderer]
+    unsafe = true
