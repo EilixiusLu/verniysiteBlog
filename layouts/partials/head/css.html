@@ -1,0 +1,22 @@
+{{ if eq hugo.Environment "development" }}
+  {{ with (templates.Defer (dict "key" "global")) }}
+    {{ with resources.Get "css/main.css" }}
+      {{ $opts := dict
+        "minify" hugo.IsProduction
+        "inlineImports" true
+      }}
+      {{ with . | css.TailwindCSS $opts }}
+        <link rel="stylesheet" href="{{ .RelPermalink }}">
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ $css := resources.Get "css/compiled.css" }}
+  {{ with $css | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{ end }}
+{{ end }}
+
+<!-- Responsive Font Support -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
