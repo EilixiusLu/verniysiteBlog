@@ -1,8 +1,8 @@
 ---
-title = 'A New Start'
-date = '2026-06-11T23:45:35+08:00'
+title: 'A New Start'
+date: 2026-06-11T23:45:35+08:00
 draft: false
-tags: ['test','tale']
+tags: ['test', 'tale']
 categories: ['Blog']
 description: '新网站以及我和维基类网站不得不扯的事'
 ---
