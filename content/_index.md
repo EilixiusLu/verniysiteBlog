@@ -2,4 +2,4 @@
 title: 'VERNIY.SITE'
 ---
 
-I look forward to sharing this great journey with you.
+生活好似给了我一把锤子和凿子，再给我一个充满泥水和沙子的世界。 --《背景小马》
