@@ -15,10 +15,20 @@
         :aria-expanded="menuOpen"
       >
         <div class="relative h-5 w-5">
-          <svg class="absolute inset-0 h-5 w-5 transition-all duration-300" :class="menuOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <!-- 三横线图标：菜单关闭时可见 -->
+          <svg
+            class="absolute inset-0 h-5 w-5 transition-all duration-300 opacity-100 rotate-0 scale-100"
+            :class="menuOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <svg class="absolute inset-0 h-5 w-5 transition-all duration-300" :class="menuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <!-- X 关闭图标：菜单关闭时隐藏（默认 opacity-0） -->
+          <svg
+            class="absolute inset-0 h-5 w-5 transition-all duration-300 opacity-0 -rotate-90 scale-75 pointer-events-none"
+            :class="menuOpen ? 'opacity-100 rotate-0 scale-100 pointer-events-auto' : 'opacity-0 -rotate-90 scale-75 pointer-events-none'"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </div>

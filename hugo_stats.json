@@ -249,6 +249,8 @@
       "pb-2",
       "pb-3",
       "pb-4",
+      "pointer-events-auto",
+      "pointer-events-none",
       "prose",
       "prose-lg",
       "prose-sm",
