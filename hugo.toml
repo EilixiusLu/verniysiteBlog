@@ -51,3 +51,11 @@ theme        = 'void'
 
   [markup.goldmark.renderer]
     unsafe = true
+
+# =============================================================================
+# Build Stats (for Tailwind CSS v4 class detection)
+# =============================================================================
+[build.buildStats]
+  disableClasses = false
+  disableTags = false
+  enable = true
