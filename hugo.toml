@@ -14,7 +14,7 @@ summaryLength = 20
 
   # Author Information
   [params.author]
-    name   = 'VERNIY'
+    name   = 'Lo Chun Chai'
     bio    = 'Personal Blog'
     avatar = 'avatar.webp'
 
