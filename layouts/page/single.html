@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+<div class="py-8 md:py-14">
+
+  {{- if .Params.image }}
+  <div class="mb-10 md:mb-14 overflow-hidden rounded-3xl aspect-video bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/50 dark:border-zinc-700/50">
+    {{- if ( strings.HasPrefix .Params.image "http" ) }}
+      <img class="w-full h-full object-cover" src="{{ .Params.image }}" alt="{{ .Title }}">
+    {{- else }}
+      {{- with $image := resources.Get .Params.image }}
+        {{- $image := $image.Resize "1200x" }}
+        <img class="w-full h-full object-cover" src="{{ $image.Permalink }}" alt="{{ $.Title }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+      {{- else }}
+        <img class="w-full h-full object-cover" src="{{ .Params.image | relURL }}" alt="{{ .Title }}">
+      {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <article class="md:col-span-2 prose lg:prose-lg dark:prose-invert max-w-none">
+      <header class="not-prose mb-8">
+        <h1 class="text-3xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100">{{ .Title }}</h1>
+      </header>
+
+      <div id="content">
+        {{- .Content -}}
+      </div>
+    </article>
+
+    <aside class="md:col-span-1">
+      {{- partial "content/aside.html" . -}}
+    </aside>
+  </div>
+
+</div>
+
+{{ end }}

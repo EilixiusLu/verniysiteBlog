@@ -1,6 +1,7 @@
 ---
 title: 'About'
 date: 2026-06-11T23:45:35+08:00
+image: 'image/about.webp'
 ---
 
 ## About the VERNIY.SITE

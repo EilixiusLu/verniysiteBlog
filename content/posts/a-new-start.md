@@ -5,6 +5,7 @@ draft: false
 tags: ['test', 'tale']
 categories: ['Blog']
 description: '新网站以及我和维基类网站不得不扯的事'
+image: 'image/a-new-start.webp'
 ---
 
 欢迎来到verniy.site！虽然我暂时还没有想好中文名叫什么，权且就用它的域名了。

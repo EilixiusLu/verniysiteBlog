@@ -4,6 +4,7 @@ date: 2026-06-11T00:00:00+08:00
 tags: ['markdown', 'test']
 categories: ['Blog']
 description: 'A comprehensive test of Markdown rendering features including headings, code blocks, math formulas, tables, and more.'
+image: 'image/markdown-format.webp'
 ---
 
 This article serves as a comprehensive test of Markdown rendering capabilities and theme features.
