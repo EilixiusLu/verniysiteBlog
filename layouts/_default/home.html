@@ -1,0 +1,100 @@
+{{ define "main" }}
+
+<!-- Feature post: 标签为 "feature" 的置顶文章大图横幅 -->
+{{- range where .Site.RegularPages "Params.tags" "intersect" (slice "feature" ) | first 1 -}}
+<section class="block md:flex relative group p-6 lg:p-10 space-y-6 md:space-x-6 my-10 md:my-14 bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200/60 dark:border-zinc-700/60 rounded-3xl hover:bg-blue-50 dark:hover:bg-zinc-800 transition duration-300">
+  <figure class="basis-1/2 w-full aspect-video overflow-hidden rounded-2xl border border-zinc-200/50 dark:border-zinc-700/50">
+    {{- if .Params.image }}
+      {{- if (strings.HasPrefix .Params.image "http") }}
+        <img class="object-cover group-hover:scale-105 transition duration-500 cursor-pointer" src="{{ .Params.image }}" alt="{{ .Title }}" style="width: 100%; height: 100%; object-fit: cover;">
+      {{- else }}
+        {{- with $imgfeature := resources.Get .Params.image }}
+          {{ $imgfeature := $imgfeature.Resize "720x Q85" -}}
+          <img class="object-cover group-hover:scale-105 transition duration-500 cursor-pointer" src="{{ $imgfeature.Permalink }}" alt="{{ $.Title }}" width="{{ $imgfeature.Width }}" height="{{ $imgfeature.Height }}">
+        {{- else }}
+          <img class="object-cover group-hover:scale-105 transition duration-500 cursor-pointer" src="{{ .Params.image | relURL }}" alt="{{ .Title }}" style="width: 100%; height: 100%; object-fit: cover;">
+        {{- end }}
+      {{- end }}
+    {{- else }}
+      <div class="w-full h-full bg-gradient-to-tr from-blue-100 to-indigo-100 dark:from-zinc-700 dark:to-zinc-800 flex items-center justify-center">
+        <span class="text-3xl font-bold text-zinc-400 dark:text-zinc-500">{{ $.Site.Title }}</span>
+      </div>
+    {{- end }}
+  </figure>
+  <div class="basis-1/2 self-center">
+    <div class="mb-3">
+      <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Featured</span>
+    </div>
+    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-zinc-900 dark:text-zinc-100">
+      <a class="before:content-[''] before:z-10 before:top-0 before:right-0 before:left-0 before:bottom-0 before:absolute before:pointer-events-auto" href="{{ .Permalink }}">{{ .Title }}</a>
+    </h2>
+    <time class="text-sm text-zinc-500 dark:text-zinc-400" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}">
+      <span class="font-medium">{{ .Date.Format "2006-01-02" }}</span>
+    </time>
+  </div>
+</section>
+{{ end -}}
+<!-- / End feature post  -->
+
+<!-- Category Post: 动态匹配分类，仅在存在分类文章时渲染 -->
+{{ $featuredCat := site.Params.homeCategory }}
+{{ if not $featuredCat }}
+  {{ range $name, $taxonomy := site.Taxonomies.categories }}
+    {{ if and (not $featuredCat) (gt (len $taxonomy) 0) }}
+      {{ $featuredCat = $name }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $featuredCat }}
+  {{ $catPages := where site.RegularPages "Params.categories" "intersect" (slice $featuredCat) }}
+  {{ if gt (len $catPages) 0 }}
+  <section class="mb-16">
+    <div class="flex items-center mb-6">
+      <h2 class="text-2xl md:text-3xl font-bold mr-auto text-zinc-900 dark:text-zinc-100">{{ $featuredCat | humanize }}</h2>
+      <a class="border border-zinc-300 dark:border-zinc-700 rounded-full py-2 px-4 md:px-6 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-sm font-medium text-zinc-700 dark:text-zinc-300 transition-colors" href="{{ printf "/categories/%s" ($featuredCat | urlize) | absURL }}">View All</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">
+      {{ range $catPages | first 3 }}
+        {{- partial "content/card" . -}}
+      {{ end }}
+    </div>
+  </section>
+  <hr class="my-8 border-zinc-200 dark:border-zinc-800">
+  {{ end }}
+{{ end }}
+<!-- / End category post -->
+
+<!-- Start Recent Posts -->
+<section class="mb-16">
+  <div class="flex items-center mb-6">
+    <h2 class="text-2xl md:text-3xl font-bold mr-auto text-zinc-900 dark:text-zinc-100">Recent Posts</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">
+    {{ $paginator := .Paginate ( where site.RegularPages "Type" "in" site.Params.mainSections) }}
+    {{ range $paginator.Pages }}
+      {{- partial "content/card" . -}}
+    {{ end }}
+  </div>
+
+  <!-- 分页控件 -->
+  {{ if or $paginator.HasPrev $paginator.HasNext }}
+  <div class="flex items-center mt-10">
+    {{- if $paginator.HasPrev -}}
+      <a class="border border-zinc-300 dark:border-zinc-700 rounded-full px-6 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 mr-auto text-sm text-zinc-700 dark:text-zinc-300 transition-colors" href="{{ $paginator.Prev.URL }}">← Previous</a>
+    {{- end -}}
+
+    {{- if $paginator.HasNext -}}
+      <a class="border border-zinc-300 dark:border-zinc-700 rounded-full px-6 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 ml-auto text-sm text-zinc-700 dark:text-zinc-300 transition-colors" href="{{ $paginator.Next.URL }}">Next →</a>
+    {{- end -}}
+  </div>
+  {{ end }}
+</section>
+<!-- / End recent posts -->
+
+{{ if .Site.Params.newsletter }}
+  {{- partial "content/newsletter.html" . -}}
+{{ end }}
+
+{{ end }}
