@@ -1,0 +1,78 @@
+<div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+  <div class="flex flex-wrap space-y-6 mb-4">
+    <!-- 左侧：站点介绍与一言展示（原 Lorem ipsum 区域） -->
+    <div class="w-full md:w-3/5 flex flex-col space-y-4 md:pr-8 lg:pr-10">
+      <a class="flex items-center group text-zinc-900 dark:text-zinc-100" href="{{ .Site.BaseURL }}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="mr-2 group-hover:animate-spin" viewBox="0 0 16 16">
+          <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          <path d="M13.997 5.17a5 5 0 0 0-8.101-4.09A5 5 0 0 0 1.28 9.342a5 5 0 0 0 8.336 5.109 3.5 3.5 0 0 0 5.201-4.065 3.001 3.001 0 0 0-.822-5.216zm-1-.034a1 1 0 0 0 .668.977 2.001 2.001 0 0 1 .547 3.478 1 1 0 0 0-.341 1.113 2.5 2.5 0 0 1-3.715 2.905 1 1 0 0 0-1.262.152 4 4 0 0 1-6.67-4.087 1 1 0 0 0-.2-1 4 4 0 0 1 3.693-6.61 1 1 0 0 0 .8-.2 4 4 0 0 1 6.48 3.273z"/>
+        </svg>
+        <span class="text-2xl font-semibold uppercase">{{ .Site.Title }}</span>
+      </a>
+
+      <p class="font-semibold text-zinc-800 dark:text-zinc-200">
+        {{ .Site.Params.description | default "Write with love. Minimalism design." }}
+      </p>
+
+      <!-- 一言 (Hitokoto) 卡片：替换原版 Lorem ipsum -->
+      <div id="hitokoto-box" class="p-4 rounded-2xl bg-white/80 dark:bg-zinc-800/80 border border-zinc-200/80 dark:border-zinc-700/80 shadow-sm transition-all">
+        <div class="flex items-start gap-2.5">
+          <svg class="w-5 h-5 text-zinc-400 dark:text-zinc-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          <div class="flex-1">
+            <p id="hitokoto-text" class="text-sm md:text-base text-zinc-700 dark:text-zinc-300 italic leading-relaxed"></p>
+            <p id="hitokoto-author" class="mt-2 text-xs md:text-sm text-zinc-400 dark:text-zinc-500 not-italic text-right"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：社交媒体链接 -->
+    <div class="self-center flex flex-col w-full md:w-2/5">
+      {{ partial "content/social-media.html" . }}
+    </div>
+  </div>
+
+  <!-- 主菜单导航 -->
+  <div class="my-8">
+    <ul class="flex flex-wrap items-center gap-4">
+      {{ range .Site.Menus.main }}
+        <li><a class="text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white decoration-auto hover:underline font-semibold" href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ul>
+  </div>
+
+  <!-- 底部版权信息、备案号与访问统计 -->
+  <div class="border-t border-zinc-200 dark:border-zinc-800 pt-4 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-zinc-500 dark:text-zinc-400">
+    <p>
+      Copyright © {{ now.Year }} {{ .Site.Title }}. All rights reserved.
+    </p>
+
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-800 dark:hover:text-zinc-200 hover:underline">CC BY-NC-SA 4.0</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:text-zinc-800 dark:hover:text-zinc-200 hover:underline">粤ICP备2026052110号-1</a>
+      <span id="busuanzi_container_site_pv" style="display: none;">总访问量 <span id="busuanzi_value_site_pv" class="font-medium text-zinc-700 dark:text-zinc-300"></span></span>
+    </div>
+  </div>
+</div>
+
+<!-- 不蒜子统计脚本 -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- 一言随机抽取脚本 -->
+<script>
+(function() {
+  var quotesList = {{ or hugo.Data.quotes site.Data.quotes | jsonify | safeJS }};
+  if (!quotesList || !quotesList.length) return;
+  var quote = quotesList[Math.floor(Math.random() * quotesList.length)];
+  var textEl = document.getElementById('hitokoto-text');
+  var authorEl = document.getElementById('hitokoto-author');
+  if (textEl && quote && quote.text) {
+    textEl.textContent = quote.text;
+    if (authorEl && quote.author) {
+      authorEl.textContent = '—— ' + quote.author;
+    }
+  }
+})();
+</script>
