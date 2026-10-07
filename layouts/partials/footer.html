@@ -60,7 +60,7 @@
 <!-- 一言随机抽取脚本 -->
 <script>
 (function() {
-  var quotesList = {{ or hugo.Data.quotes site.Data.quotes | jsonify | safeJS }};
+  var quotesList = {{ site.Data.quotes | jsonify | safeJS }};
   if (!quotesList || !quotesList.length) return;
   var quote = quotesList[Math.floor(Math.random() * quotesList.length)];
   var textEl = document.getElementById('hitokoto-text');
