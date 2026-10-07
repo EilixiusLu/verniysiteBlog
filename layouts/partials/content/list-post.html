@@ -1,0 +1,25 @@
+<article class="relative group flex flex-row items-center">
+  <a class="insert-link" href="{{ .Permalink }}" aria-label="{{ .LinkTitle }}"></a>
+  <figure class="basis-2/5 aspect-video overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-700/60 flex-shrink-0">
+    {{- if .Params.image }}
+      {{- if (strings.HasPrefix .Params.image "http") }}
+        <img class="object-cover h-full w-full group-hover:scale-105 transition duration-500" src="{{ .Params.image }}" alt="{{ .LinkTitle }}" style="width: 100%; height: 100%; object-fit: cover;">
+      {{- else }}
+        {{- with $imglist := resources.Get .Params.image -}}
+          {{- $imglist := $imglist.Resize "360x" -}}
+          <img class="object-cover h-full w-full group-hover:scale-105 transition duration-500" src="{{ $imglist.Permalink }}" alt="{{ $.LinkTitle }}" width="{{ $imglist.Width }}" height="{{ $imglist.Height }}" style="width: 100%; height: 100%; object-fit: cover;">
+        {{- else }}
+          <img class="object-cover h-full w-full group-hover:scale-105 transition duration-500" src="{{ .Params.image | relURL }}" alt="{{ .LinkTitle }}" style="width: 100%; height: 100%; object-fit: cover;">
+        {{- end }}
+      {{- end }}
+    {{- else }}
+      <div class="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-zinc-800 dark:to-zinc-900 flex items-center justify-center p-2 text-center">
+        <span class="text-xs font-bold text-zinc-400 dark:text-zinc-600 select-none">{{ .LinkTitle }}</span>
+      </div>
+    {{- end }}
+  </figure>
+  <div class="basis-3/5 self-center ml-3.5 flex flex-col justify-center">
+    <h3 class="text-sm font-bold text-zinc-800 dark:text-zinc-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 line-clamp-2 transition-colors">{{ .LinkTitle }}</h3>
+    <time class="text-xs text-zinc-400 dark:text-zinc-500 mt-1" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}">{{ .Date.Format "2006-01-02" }}</time>
+  </div>
+</article>
