@@ -9,7 +9,7 @@ summaryLength = 20
 # Site Parameters
 # =============================================================================
 [params]
-  description  = 'VERNIY.SITE - 个人静态博客'
+  description  = '包罗万象，举一...然而没有千从'
   mainSections = 'posts'
 
   # Author Information

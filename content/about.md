@@ -1,10 +1,11 @@
 ---
 title: 'About'
+date: 2026-06-11T23:45:35+08:00
 ---
 
 ## About the VERNIY.SITE
 
-一个使用[Hugo](https://gohugo.io/)和[Void](https://github.com/Daucloud/hugo-theme-void)主题，部署在[Tencent Cloud EdgeOne Pages](https://edgeone.cloud.tencent.com/)的纯静态个人博客网站。
+一个使用[Hugo](https://gohugo.io/)和[Pehtheme](https://github.com/fauzanmy/pehtheme-hugo)主题，部署在[Tencent Cloud EdgeOne Pages](https://edgeone.cloud.tencent.com/)的纯静态个人博客网站。原先使用改造过的[Void](https://github.com/Daucloud/hugo-theme-void)主题。
 
 网站域名Verniy（Верный）一词来自俄语，意为“信赖”，同时也是我个人最早喜欢的二次元角色，来自古典二次元游戏《舰队Collection》里的Верный号驱逐舰的名字，她也是为数不多在当时游戏内的苏联舰艇。
 
