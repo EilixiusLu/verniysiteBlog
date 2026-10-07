@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source "../../layouts/**/*.html";
+@source "../../content/**/*.md";
+@source "../../themes/pehtheme-hugo/layouts/**/*.html";
+@source "../../themes/pehtheme-hugo/assets/**/*.js";
+
+@layer components {
+  .insert-link {
+    @apply before:absolute before:content-[''] before:z-10 before:top-0 before:right-0 before:left-0 before:bottom-0 before:pointer-events-auto;
+  }
+}
+
+@layer utilities {
+  .close {
+    display: none;
+  }
+
+  .open {
+    display: block;
+  }
+}
