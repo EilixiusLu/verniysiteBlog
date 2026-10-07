@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col transition-colors duration-200">
+  <header class="py-6 border-b border-zinc-200 dark:border-zinc-800">
+    {{- partial "header.html" . -}}
+  </header>
+  <main class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 flex-1 w-full">
+    {{- block "main" . }}{{ end -}}
+  </main>
+  <footer class="bg-zinc-100 dark:bg-zinc-950/80 border-t border-zinc-200/80 dark:border-zinc-800 py-10 md:py-14 mt-auto">
+    {{- partial "footer.html" . -}}
+  </footer>
+  {{- partialCached "footer/js.html" . }}
+</body>
+</html>

@@ -1,0 +1,15 @@
+{{- $page := .page }}
+{{- $taxonomy := .taxonomy }}
+
+{{- with $page.GetTerms $taxonomy }}
+  {{- $label := (index . 0).Parent.LinkTitle }}
+
+  <ul id="taxonomy" class="not-prose flex items-center space-x-3 flex-nowrap whitespace-nowrap overflow-x-auto py-2">
+    <li class="font-semibold text-zinc-800 dark:text-zinc-200">{{ $label }}:</li>
+    {{- range . }}
+      <li>
+        <a class="py-1.5 px-4 text-sm border border-zinc-300 dark:border-zinc-700 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      </li>
+    {{- end }}
+  </ul>
+{{- end }}

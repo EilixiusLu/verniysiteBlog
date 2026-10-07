@@ -1,0 +1,28 @@
+<article class="relative group bg-zinc-100 dark:bg-zinc-800/80 hover:bg-blue-50 dark:hover:bg-zinc-800 border border-transparent dark:border-zinc-700/60 rounded-3xl transition duration-300 flex flex-col overflow-hidden">
+  <a class="insert-link" href="{{ .Permalink }}" aria-label="{{ .LinkTitle }}"></a>
+
+  <figure class="w-full aspect-video overflow-hidden rounded-t-3xl bg-zinc-200 dark:bg-zinc-700">
+    {{- if .Params.image }}
+      {{- if (strings.HasPrefix .Params.image "http") }}
+        <img class="object-cover group-hover:scale-105 transition duration-500 cursor-pointer w-full h-full" src="{{ .Params.image }}" alt="{{ .LinkTitle }}" style="object-fit: cover;">
+      {{- else }}
+        {{- with $imgcard := resources.Get .Params.image -}}
+          {{- $imgcard := $imgcard.Process "resize 750x" -}}
+          <img class="object-cover group-hover:scale-105 transition duration-500 cursor-pointer w-full h-full" src="{{ $imgcard.Permalink }}" alt="{{ $.LinkTitle }}" width="{{ $imgcard.Width }}" height="{{ $imgcard.Height }}" style="object-fit: cover;">
+        {{- else }}
+          <img class="object-cover group-hover:scale-105 transition duration-500 cursor-pointer w-full h-full" src="{{ .Params.image | relURL }}" alt="{{ .LinkTitle }}" style="object-fit: cover;">
+        {{- end }}
+      {{- end }}
+    {{- else }}
+      <div class="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-zinc-800 dark:to-zinc-900 flex items-center justify-center p-6 text-center">
+        <span class="text-xl font-bold text-zinc-400 dark:text-zinc-600 select-none">{{ .LinkTitle }}</span>
+      </div>
+    {{- end }}
+  </figure>
+
+  <div class="p-6 flex-1 flex flex-col">
+    <time class="text-xs text-zinc-500 dark:text-zinc-400 font-medium" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}">{{ .Date.Format "2006-01-02" }}</time>
+    <h3 class="my-3 text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">{{ .LinkTitle }}</h3>
+    <p class="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 line-clamp-2 mt-auto">{{ .Params.description }}</p>
+  </div>
+</article>
