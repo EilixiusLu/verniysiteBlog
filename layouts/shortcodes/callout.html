@@ -1,0 +1,14 @@
+{{ $type := .Get "type" | default "info" }}
+{{ $border := "border-blue-500 bg-blue-50 text-blue-900 dark:bg-blue-950/30 dark:text-blue-200 dark:border-blue-400" }}
+{{ if eq $type "tip" }}
+  {{ $border = "border-emerald-500 bg-emerald-50 text-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-200 dark:border-emerald-400" }}
+{{ else if eq $type "warning" }}
+  {{ $border = "border-amber-500 bg-amber-50 text-amber-900 dark:bg-amber-950/30 dark:text-amber-200 dark:border-amber-400" }}
+{{ else if or (eq $type "danger") (eq $type "error") }}
+  {{ $border = "border-rose-500 bg-rose-50 text-rose-900 dark:bg-rose-950/30 dark:text-rose-200 dark:border-rose-400" }}
+{{ end }}
+<div class="my-6 rounded-xl border-l-4 p-4 not-prose {{ $border }}">
+  <div class="text-sm md:text-base leading-relaxed">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

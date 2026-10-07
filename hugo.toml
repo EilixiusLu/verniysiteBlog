@@ -1,18 +1,24 @@
 baseURL      = 'https://verniy.site/'
-locale = 'zh-CN'
+languageCode = 'zh-CN'
 title        = 'VERNIY.SITE'
-theme        = 'void'
+theme        = 'pehtheme-hugo'
+
+summaryLength = 20
 
 # =============================================================================
-# Avatar (displayed on homepage & about page)
+# Site Parameters
 # =============================================================================
 [params]
-  [params.avatar]
-    url = '/avatar.webp'
+  description  = 'VERNIY.SITE - 个人静态博客'
+  mainSections = 'posts'
 
-# =============================================================================
-# Social Links
-# =============================================================================
+  # Author Information
+  [params.author]
+    name   = 'VERNIY'
+    bio    = 'Personal Blog'
+    avatar = 'avatar.webp'
+
+  # Social Links
   [params.social]
     github = 'https://github.com/EilixiusLu'
     email  = 'dec_verniy@outlook.com'
@@ -21,7 +27,7 @@ theme        = 'void'
 # Main Menu
 # =============================================================================
 [[menus.main]]
-  name    = 'Main'
+  name    = 'Home'
   pageRef = '/'
   weight  = 10
 
@@ -41,7 +47,7 @@ theme        = 'void'
   weight  = 40
 
 # =============================================================================
-# Markup
+# Markup Settings
 # =============================================================================
 [markup]
   [markup.tableOfContents]
@@ -51,11 +57,3 @@ theme        = 'void'
 
   [markup.goldmark.renderer]
     unsafe = true
-
-# =============================================================================
-# Build Stats (for Tailwind CSS v4 class detection)
-# =============================================================================
-[build.buildStats]
-  disableClasses = false
-  disableTags = false
-  enable = true
